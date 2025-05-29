@@ -4,6 +4,8 @@ import com.bergamo.bgcommerce.dto.ProductDTO;
 import com.bergamo.bgcommerce.entities.Product;
 import com.bergamo.bgcommerce.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,14 @@ public class ProductServices {
     public ProductDTO findById(Long id) {
         Product product = repository.findById(id).get();
         return new ProductDTO(product);
+
+    }
+
+    @Transactional(readOnly = true)
+    public Page<ProductDTO> findAll(Pageable pageable) {
+        Page<Product> result = repository.findAll(pageable);
+        return result.map(ProductDTO::new);
+
     }
 
 

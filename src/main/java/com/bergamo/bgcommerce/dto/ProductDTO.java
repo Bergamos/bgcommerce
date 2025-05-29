@@ -21,6 +21,8 @@ public class ProductDTO {
         this.imgUrl = imgUrl;
     }
 
+
+    //modelmapeper
     public ProductDTO(Product entity) {
         id = entity.getId();
         name = entity.getName();
